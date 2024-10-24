@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GamerTech & Apparel Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .product {
+            background: white;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            width: 250px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+        .product h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .product p {
+            font-size: 16px;
+            color: #e8491d;
+        }
+        .section-title {
+            text-align: left;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .cart {
+            margin: 20px;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-total {
+            text-align: right;
+            padding: 10px 0;
+        }
+        .cart-total p {
+            font-size: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>GamerTech & Apparel Store</h1>
+</header>
+
+<div class="container">
+    <!-- Product Listings -->
+    <div class="section-title">Jacken</div>
+    <div class="product-list">
+        <div class="product" onclick="showProductPage('Blau Jacke', '60.00', 'blau_jacke.png');">
+            <img src="blau_jacke.png" alt="Blau Jacke">
+            <h3>Blau Jacke</h3>
+            <p>60.00 CHF</p>
+        </div>
+        <div class="product" onclick="showProductPage('Dunkelblau Jacke', '65.00', 'dunkelblau_jacke.png');">
+            <img src="dunkelblau_jacke.png" alt="Dunkelblau Jacke">
+            <h3>Dunkelblau Jacke</h3>
+            <p>65.00 CHF</p>
+        </div>
+        <div class="product" onclick="showProductPage('Rot Jacke', '60.00', 'rot_jacke.png');">
+            <img src="rot_jacke.png" alt="Rot Jacke">
+            <h3>Rot Jacke</h3>
+            <p>60.00 CHF</p>
+        </div>
+    </div>
+
+    <div class="section-title">Hoodies</div>
+    <div class="product-list">
+        <div class="product" onclick="showProductPage('Schwarz Hoodie', '45.00', 'schwarz_hoodie.png');">
+            <img src="schwarz_hoodie.png" alt="Schwarz Hoodie">
+            <h3>Schwarz Hoodie</h3>
+            <p>45.00 CHF</p>
+        </div>
+        <div class="product" onclick="showProductPage('Tiger Sweatshirt', '20.00', 'tiger_sweatshirt_black.png');">
+            <img src="tiger_sweatshirt_black.png" alt="Tiger Sweatshirt">
+            <h3>Tiger Sweatshirt</h3>
+            <p>20.00 CHF</p>
+        </div>
+    </div>
+
+    <div class="section-title">Gaming Gear</div>
+    <div class="product-list">
+        <div class="product" onclick="showProductPage('Mechanical Keyboard', '40.00', 'mechanical_keyboard_L700.png');">
+            <img src="mechanical_keyboard_L700.png" alt="Mechanical Keyboard L700">
+            <h3>Mechanical Keyboard L700</h3>
+            <p>40.00 CHF</p>
+        </div>
+    </div>
+</div>
+
+<!-- Product Page -->
+<div id="product-page" class="container hidden">
+    <button class="back-btn" onclick="goBackToSearch()">Zurück</button>
+    <div class="product-details">
+        <div class="product-img">
+            <img id="product-image" src="tiger_sweatshirt_black.png" alt="Product Image">
+        </div>
+        <div class="details">
+            <h1 id="product-title">Tiger Sweatshirt</h1>
+            <p id="product-price">Preis: 20.00 CHF</p>
+            <p>Farbe auswählen:</p>
+            <select id="color" onchange="updateProductImage()">
+                <option value="Schwarz">Schwarz</option>
+                <option value="Grau">Grau</option>
+                <option value="Rot">Rot</option>
+                <option value="Blau">Blau</option>
+            </select>
+            <p>Größe auswählen:</p>
+            <select id="size">
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+            </select>
+            <p>Menge:</p>
+            <input type="number" id="quantity" value="1" min="1">
+            <button onclick="addToCart()">In den Warenkorb</button>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Page -->
+<div id="cart-page" class="container hidden">
+    <h2>Ihr Warenkorb</h2>
+    <div id="cart-items">
+        <!-- Cart items will be injected here -->
+    </div>
+    <div class="cart-total">
+        <p id="cart-total-price">Gesamt: 0 CHF</p>
+    </div>
+    <button onclick="alert('Zur Kasse')">Zur Kasse</button>
+</div>
+
+<script>
+    let cart = [];
+    let productImages = {
+        "Tiger Sweatshirt": {
+            "Schwarz": "tiger_sweatshirt_black.png",
+            "Grau": "tiger_sweatshirt_grey.png",
+            "Rot": "tiger_sweatshirt_red.png",
+            "Blau": "tiger_sweatshirt_blue.png"
+        },
+        "Blau Jacke": {
+            "Blau": "blau_jacke.png"
+        },
+        "Dunkelblau Jacke": {
+            "Blau": "dunkelblau_jacke.png"
+        },
+        "Schwarz Hoodie": {
+            "Schwarz": "schwarz_hoodie.png"
+        },
+        "Mechanical Keyboard": {
+            "L700": "mechanical_keyboard_L700.png"
+        }
+    };
+
+    function showProductPage(productName, price, imgSrc) {
+        document.getElementById('search-page').classList.add('hidden');
+        document.getElementById('product-page').classList.remove('hidden');
+        document.getElementById('product-title').innerText = productName;
+        document.getElementById('product-price').innerText = "Preis: " + price + " CHF";
+        document.getElementById('product-image').src = imgSrc;
+        document.getElementById('product-image').alt = productName;
+    }
+
+    function updateProductImage() {
+        let productName = document.getElementById('product-title').innerText;
+        let selectedColor = document.getElementById('color').value;
+        let imageFile = productImages[productName][selectedColor];
+        document.getElementById('product-image').src = imageFile;
+    }
+
+    function addToCart() {
+        let productName = document.getElementById('product-title').innerText;
+        let price = parseFloat(document.getElementById('product-price').innerText.replace('Preis: ', '').replace(' CHF', ''));
+        let color = document.getElementById('color').value;
+        let size = document.getElementById('size').value;
+        let quantity = parseInt(document.getElementById('quantity').value);
+
+        let itemTotal = price * quantity;
+
+        cart.push({ name: productName, price: price, color: color, size: size, quantity: quantity, total: itemTotal });
+        alert(productName + " in " + color + " Farbe und Größe " + size + " (" + quantity + " Stück) wurde zum Warenkorb hinzugefügt!");
+
+        showCartPage();
+    }
+
+    function showCartPage() {
+        document.getElementById('cart-page').classList.remove('hidden');
+
+        let cartItemsDiv = document.getElementById('cart-items');
+        cartItemsDiv.innerHTML = ''; // Clear previous content
+
+        let total = 0;
+        cart.forEach((item, index) => {
+            total += item.total;
+            let cartItemDiv = document.createElement('div');
+            cartItemDiv.className = 'cart-item';
+            cartItemDiv.innerHTML = `
+                <img src="${productImages[item.name][item.color]}" alt="${item.name}">
+                <p>${item.name} (Farbe ${item.color}, Größe ${item.size}, Menge: ${item.quantity})</p>
+                <p>${item.total} CHF</p>
+            `;
+            cartItemsDiv.appendChild(cartItemDiv);
+        });
+
+        document.getElementById('cart-total-price').innerText = "Gesamt: " + total + " CHF";
+    }
+
+    function goBackToSearch() {
+        document.getElementById('product-page').classList.add('hidden');
+        document.getElementById('search-page').classList.remove('hidden');
+        document.getElementById('cart-page').classList.add('hidden');
+    }
+</script>
+
+</body>
+</html>
