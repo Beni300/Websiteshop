@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <!-- Display the product image -->
+        <img src="{{ url_for('static', filename=product['image']) }}" alt="{{ product['name'] }}" class="product-image">
+    
+        
+        <!-- Product name and price -->
+        <h2>{{ product['name'] }}</h2>
+        <p>Price: {{ product['price'] }} CHF</p>
+        
+        <!-- View Product button -->
+        <a href="{{ url_for('product', product_id=product['id']) }}" class="btn">View Product</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

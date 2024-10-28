@@ -1,0 +1,67 @@
+/* General Body and Background */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("/static/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #0a0101;
+    margin: 0;
+}
+
+/* Header Styling */
+header {
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Slight transparency */
+}
+
+header a {
+    color: #ffffff;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+/* Product Grid and Cards */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product-card {
+    background-color: rgba(34, 34, 34, 0.9); /* Dark background with transparency */
+    margin: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.product-card h2, .product-card p {
+    margin: 5px 0;
+}
+
+/* Button Styling for "View Product" */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff0084, #3301ff);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #3301ff, #ff0084);
+}
